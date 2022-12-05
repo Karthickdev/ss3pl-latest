@@ -16,6 +16,7 @@ import 'dart:io' as Io;
 import 'package:printing/printing.dart';
 import 'dart:math' as ma;
 import 'package:southshore3pl/router/route_names.dart';
+import 'package:southshore3pl/res/res.dart';
 
 final packappmultiviewprovider =
     ChangeNotifierProvider((ref) => MultiitemViewModel(ref.read));
@@ -160,6 +161,7 @@ class MultiitemViewModel extends DefaultChangeNotifier {
           .showSnackBar(errorSnackBar('UPC ALREADY SCANNED'));
       eventLogController.text =
           "UPC ALREADY SCANNED" + '\n' + eventLogController.text;
+      clearUpccontroller(index: index);
     } else if (getpackdetailsData!.orderItemList[index].upc ==
             controller[index].text &&
         getpackdetailsData!.orderItemList[index].quantityorder != "0") {
@@ -275,7 +277,7 @@ class MultiitemViewModel extends DefaultChangeNotifier {
           pageFormat: PdfPageFormat.a4,
           build: (pw.Context context) {
             return pw.Container(
-              height: 300,
+              height: sizes.height,
               decoration: pw.BoxDecoration(
                   image: pw.DecorationImage(
                       fit: pw.BoxFit.cover, image: pw.MemoryImage(doc))),
@@ -288,11 +290,11 @@ class MultiitemViewModel extends DefaultChangeNotifier {
           context,
         );
       }
-      clearController();
-      clearDto();
-      clearError();
-      Navigator.pop(context);
-      isavailable = false;
+      // clearController();
+      // clearDto();
+      // clearError();
+      // Navigator.pop(context);
+      // isavailable = false;
       notifyListeners();
       // }
     }

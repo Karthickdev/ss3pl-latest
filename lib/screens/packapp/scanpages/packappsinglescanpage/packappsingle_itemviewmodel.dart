@@ -320,6 +320,7 @@ class SingleitemViewModel extends DefaultChangeNotifier {
           if (getpackdetailsData!.orderItemList.length == 1 &&
               getpackdetailsData!.orderItemList[0].quantityorder == "0" &&
               getpackdetailsData!.clientName != "Jingle Bunnies") {
+            isJingleBunnies = true;
             updateitem(context);
             clearInputFocus();
             notifyListeners();

@@ -93,6 +93,7 @@ class MultiitemViewModel extends DefaultChangeNotifier {
           .showSnackBar(errorSnackBar('UPC ALREADY SCANNED'));
       eventLogController.text =
           "UPC ALREADY SCANNED" + '\n' + eventLogController.text;
+      clearUpccontroller(index: index);
     } else if (getpackdetailsData!.orderItemList[index].upc ==
             controller[index].text &&
         getpackdetailsData!.orderItemList[index].quantityorder != "0") {
@@ -130,7 +131,7 @@ class MultiitemViewModel extends DefaultChangeNotifier {
           .toList();
       if (checkAllItems.isEmpty) {
         //print(checkAllItems);
-        updateitem(context);
+        validateequal = true;
       }
     } else {
       clearUpccontroller(index: index);
@@ -192,14 +193,18 @@ class MultiitemViewModel extends DefaultChangeNotifier {
       clearError();
       toggleLoadingOn(true);
       validateloading = true;
+      getpackdetailsData!.scanStatusEnum = 30.toString();
       getpackdetailsData!.orderItemList[0].itemScanStatusEnum = 30.toString();
       getupdatescanData = await context
           .read(gerorderitemdetailsProvider)
           .updateDetails(input: getpackdetailsData!, context: context);
-      if (getupdatescanData!.popupMessage.information.toString() ==
-          "Order has been marked as Picked on OPAL") {
-        ScaffoldMessenger.of(context).showSnackBar(successSnackBar(
-            getupdatescanData!.popupMessage.information.toString()));
+      // print(getupdatescanData!.popupMessage.information.toString());
+      // print(getupdatescanData!.scanStatusEnum.toString());
+      if (getupdatescanData!.scanStatusEnum == "Picked") {
+        // print('test');
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //     successSnackBar("Order has been marked as Picked on OPAL"));
+        // print('test1');
         eventLogController.text =
             "${getupdatescanData!.popupMessage.information}" +
                 '\n' +

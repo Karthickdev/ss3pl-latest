@@ -442,11 +442,11 @@ class POItemListHeader extends ConsumerWidget {
                                           style: textStyles.kTextTitle,
                                         ),
                                         Text(
-                                          ' Picked /',
+                                          ' Packed /',
                                           style: textStyles.kTextTitle,
                                         ),
                                         Text(
-                                          'Unpicked',
+                                          'Unpacked',
                                           style: textStyles.kTextTitle,
                                         ),
                                       ],
